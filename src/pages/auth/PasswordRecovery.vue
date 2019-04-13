@@ -1,0 +1,81 @@
+<template>
+  <v-app id="login" class="primary">
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <v-flex xs12 sm8 md4 lg4>
+            <v-card class="elevation-1 pa-3">
+              <v-card-text>
+                <div class="layout column align-center">
+                  <img src="/static/m.png" alt="Text Infinity" width="120" height="120">
+                  <h2 class="flex my-4 primary--text">Recover Password</h2>
+                </div>
+                <v-form>
+                  <v-text-field append-icon="email" name="email" label="Account Email" type="text"
+                  v-model="model.email"
+                  v-validate="'required|email'"
+                  :error-messages="errors.collect('email')"
+                  data-vv-name="email"
+                  required>
+                </v-text-field>
+                </v-form>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn block color="primary" @click="sendEmail" :loading="loading" :disabled="disabled">Submit</v-btn>
+              </v-card-actions>
+
+              <v-card-actions>
+                <router-link to="/access/login">Login Instead</router-link>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    loading: false,
+    model: {
+      email: null,
+    }
+  }),
+
+  computed: {
+    disabled () {
+      if (this.model.email === null) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+  },
+
+  methods: {
+    sendEmail () {
+      this.loading = true;
+      setTimeout(() => {
+        this.$router.push('/access/password-recovery-sent');
+      }, 1000);
+    }
+  },
+
+};
+</script>
+<style scoped lang="css">
+  #login {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    z-index: 0;
+  }
+</style>
