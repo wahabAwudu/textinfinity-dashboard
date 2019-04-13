@@ -65,7 +65,7 @@ export default [
 
   {
     path: '/access/password-recovery',
-    meta: { neutral: true },
+    meta: { public: true },
     name: 'PasswordRecovery',
     component: () => import(
       /* webpackChunkName: "routes" */
@@ -73,10 +73,10 @@ export default [
       `@/pages/auth/PasswordRecovery.vue`
     )
   },
-
+ 
   {
     path: '/access/password-recovery-sent',
-    meta: { neutral: true },
+    meta: { public: true },
     name: 'PasswordRecoverySent',
     component: () => import(
       /* webpackChunkName: "routes" */
@@ -87,7 +87,7 @@ export default [
 
   {
     path: '/access/password-recovery-reset',
-    meta: { neutral: true },
+    meta: { public: true },
     name: 'PasswordRecoveryReset',
     component: () => import(
       /* webpackChunkName: "routes" */
