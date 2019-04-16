@@ -19,19 +19,43 @@
           </v-flex>
 
           <v-flex lg12 sm12>
-            <v-text-field textarea name="message_body" label="Message Body"
+            <v-textarea name="message_body" label="Message Body"
             v-model="model.message_body"
             v-validate="'required'"
             :error-messages="errors.collect('message_body')"
             :counter="153"
             data-vv-name="message_body"
             required>
-            </v-text-field>
+            </v-textarea>
           </v-flex>
 
           <v-flex lg12 xs12 sm12 d-flex>
           <v-select
-          v-model="model.list"
+          v-model="text_mode"
+          :items="text_modes"
+          label="Select Text Mode"
+          outline
+           ></v-select>
+          </v-flex>
+
+          <v-flex lg12 sm12 v-if="text_mode === text_modes[0]">
+            <v-textarea name="phone_numbers" label="Paste Numbers (Each Separated by comma ,)"
+            v-model="model.phone_numbers"
+            v-validate="'required'"
+            :error-messages="errors.collect('phone_numbers')"
+            :counter="153"
+            data-vv-name="phone_numbers"
+            required>
+            </v-textarea>
+          </v-flex>
+
+          <v-flex lg12 xs12 sm12 v-if="text_mode === text_modes[1]">
+            Choose Text File<input type="file" @change="setTextFile">
+          </v-flex>
+
+          <v-flex lg12 xs12 sm12 d-flex v-if="text_mode === text_modes[2]">
+          <v-select
+          v-model="model.contact_list"
           :items="lists"
           label="Select Contact List"
           outline
@@ -51,14 +75,23 @@
 </template>
 
 <script>
+/* eslint-disable */
+import axios from 'axios';
+import { getHeaders } from '@/config';
+
 export default {
   data: () => ({
     loading: false,
     model: {
       sender_id: null,
       message_body: null,
-      list: null,
+      contact_list: null,
+      phone_numbers: null,
     },
+    text_mode: null,
+    text_modes: ['Paste Phone Numbers Here', 'Upload Text File', 'Select From Contact Lists'],
+    text_file: null,
+
     lists: ['List1', 'List2'],
   }),
 
@@ -73,12 +106,53 @@ export default {
   },
   methods: {
     sendBulkSMS () {
-      this.loading = true;
+      this.sendFormText();
+    },
+
+    sendTextFile () {
+      const form_data = new FormData();
+      form_data.append('text_file', this.text_file, this.text_file.name);
+      let url = 'https://github.com';
+
+      axios.post(url, form_data, { headers: getHeaders() })
+        .then(res => {
+        //
+        })
+        .catch(err => {
+          this.$toasted.error('Error Occurred saving file', {
+            icon: 'block',
+            position: 'top-right',
+            duration: 3000,
+          });
+        });
+    },
+
+    sendFormText() {
+      let separated_phone_numbers = this.model.phone_numbers.split(",");
+      const contactPayload = {
+        phone_numbers: separated_phone_numbers,
+      };
+
+      // axios.post('https://github.com', contactPayload, { headers: getHeaders() })
+      //   .then(res => {
+      //   //
+      //   })
+      //   .catch(err => {
+      //     this.$toasted.error('Error Occurred saving file', {
+      //       icon: 'block',
+      //       position: 'top-right',
+      //       duration: 3000,
+      //     });
+      //   });
     },
 
     saveToDraft () {
-      this.loading = true;
-    }
+      //this.loading = true;
+    },
+
+    setTextFile (e) {
+      this.text_file = e.target.files[0];
+    },
   }
 };
 </script>

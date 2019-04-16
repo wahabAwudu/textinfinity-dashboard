@@ -97,7 +97,7 @@ export default [
   },
 
   {
-    path: '/user/profile',
+    path: '/dashboard/profile',
     meta: { breadcrumb: true },
     name: 'components/userprofile',
     component: () => import(
@@ -108,7 +108,7 @@ export default [
   },
 
   {
-    path: '/user/profile/update',
+    path: '/dashboard/profile/update',
     meta: { breadcrumb: true },
     name: 'components/userprofileupdate',
     component: () => import(
@@ -133,29 +133,30 @@ export default [
     path: '/dashboard',
     meta: { breadcrumb: true },
     name: 'Dashboard',
-    component: () => import(
-      /* webpackChunkName: "routes" */
-      /* webpackMode: "lazy-once" */
-      `@/pages/Dashboard.vue`
-    )
+    redirect: {
+      name: 'SendBulkSms'
+    }
+    // component: () => import(
+    //   `@/pages/Dashboard.vue`
+    // )
   },
 
   /* BULK SMS Links */
   {
     path: '/dashboard/send-bulk-sms',
     meta: { breadcrumb: true },
-    name: 'components/send-bulk-sms',
+    name: 'SendBulkSms',
     component: () => import(
       /* webpackChunkName: "routes" */
       /* webpackMode: "lazy-once" */
-      `@/pages/SendBulkSMS.vue`
+      `@/pages/SendBulkSms.vue`
     )
   },
 
   {
     path: '/dashboard/contact-lists',
     meta: { breadcrumb: true },
-    name: 'components/contact-lists',
+    name: 'ContactLists',
     component: () => import(
       /* webpackChunkName: "routes" */
       /* webpackMode: "lazy-once" */
@@ -166,7 +167,7 @@ export default [
   {
     path: '/dashboard/new-contact-list',
     meta: { breadcrumb: true },
-    name: 'components/new-contact-list',
+    name: 'NewContactList',
     component: () => import(
       /* webpackChunkName: "routes" */
       /* webpackMode: "lazy-once" */
@@ -177,33 +178,33 @@ export default [
   {
     path: '/dashboard/draft-sms',
     meta: { breadcrumb: true },
-    name: 'components/draft-sms',
+    name: 'DraftSms',
     component: () => import(
       /* webpackChunkName: "routes" */
       /* webpackMode: "lazy-once" */
-      `@/pages/DraftSMS.vue`
+      `@/pages/DraftSms.vue`
     )
   },
 
   {
-    path: '/dashboard/sms-history',
+    path: '/dashboard/history',
     meta: { breadcrumb: true },
-    name: 'components/sms-history',
+    name: 'History',
     component: () => import(
       /* webpackChunkName: "routes" */
       /* webpackMode: "lazy-once" */
-      `@/pages/SMSHistory.vue`
+      `@/pages/History.vue`
     )
   },
 
   {
     path: '/dashboard/bulk-sms-re-use/:id',
     meta: { breadcrumb: true },
-    name: 'components/bulk-sms-re-use',
+    name: 'BulkSmsReUse',
     component: () => import(
       /* webpackChunkName: "routes" */
       /* webpackMode: "lazy-once" */
-      `@/pages/BulkSMSReUse.vue`
+      `@/pages/BulkSmsReUse.vue`
     )
   },
 

@@ -1,17 +1,10 @@
 const Menu =  [
   { header: 'Navigation' },
   {
-    title: 'Dashboard',
-    group: 'apps',
-    icon: 'dashboard',
-    name: 'Dashboard',
-  },
-
-  {
     title: 'Send Bulk SMS',
     group: 'apps',
     icon: 'email',
-    name: 'send-bulk-sms',
+    name: 'SendBulkSms',
   },
 
   {
@@ -25,30 +18,37 @@ const Menu =  [
     title: 'Draft SMS',
     group: 'apps',
     icon: 'save',
-    name: 'DraftSMS',
+    name: 'DraftSms',
   },
 
   {
-    title: 'SMS Activity Logs',
+    title: 'History',
     group: 'apps',
     icon: 'navigation',
-    name: 'SMSActivityLogs',
+    name: 'History',
   },
 
-  { divider: true },
-  { header: 'Activities' },
-  {
-    title: 'Menu',
-    group: 'components',
-    component: 'components',
-    icon: 'email',
-    items: [
-      { name: 'Bulk SMS', title: 'Bulk SMS', component: 'components/send-bulk-sms' },
-      { name: 'Contact Lists', title: 'Contact Lists', component: 'components/contact-lists' },
-      { name: 'Draft SMS', title: 'Draft SMS', component: 'components/draft-sms' },
-      { name: 'SMS History', title: 'SMS History', component: 'components/sms-history' },
-    ]
-  },
+  // {
+  //   title: 'Statistics',
+  //   group: 'apps',
+  //   icon: 'dashboard',
+  //   name: 'Dashboard',
+  // },
+
+  // { divider: true },
+  // { header: 'Activities' },
+  // {
+  //   title: 'Menu',
+  //   group: 'components',
+  //   component: 'components',
+  //   icon: 'email',
+  //   items: [
+  //     { name: 'Bulk SMS', title: 'Bulk SMS', component: 'components/send-bulk-sms' },
+  //     { name: 'Contact Lists', title: 'Contact Lists', component: 'components/contact-lists' },
+  //     { name: 'Draft SMS', title: 'Draft SMS', component: 'components/draft-sms' },
+  //     { name: 'SMS History', title: 'SMS History', component: 'components/sms-history' },
+  //   ]
+  // },
 
   { divider: true },
   { header: 'Account Settings' },
@@ -59,7 +59,7 @@ const Menu =  [
     icon: 'account_circle',
     items: [
       { name: 'Detail', title: 'Detail', component: 'components/userprofile' },
-      { name: 'Update', title: 'Update', component: 'components/userprofileupdate' },
+      // { name: 'Update', title: 'Update', component: 'components/userprofileupdate' },
     ]
   },
 

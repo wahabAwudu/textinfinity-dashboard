@@ -31,8 +31,9 @@
                 </v-card-text>
 
                 <v-card-actions>
+                  <router-link to="/dashboard/profile"><v-btn color="primary"><v-icon>arrow_left</v-icon> Profile</v-btn></router-link>
                   <v-spacer></v-spacer>
-                  <v-btn block color="primary" @click="updateAccount" :loading="loading" :disabled="disabledPhone">Submit</v-btn>
+                  <v-btn color="success" block @click="updateAccount" :loading="loading" :disabled="disabledPhone">Submit</v-btn>
                 </v-card-actions>
               </v-card>
             </v-tab-item>
@@ -60,6 +61,7 @@
                 </v-card-text>
 
                 <v-card-actions>
+                  <router-link to="/dashboard/profile"><v-btn color="primary"><v-icon>arrow_left</v-icon> Profile</v-btn></router-link>
                   <v-spacer></v-spacer>
                   <v-btn block color="primary" @click="changePassword" :loading="loading" :disabled="disabledPassword">Change</v-btn>
                 </v-card-actions>
@@ -141,12 +143,13 @@ export default {
 
       axios.put(customUsersUrl + userId + '/', accountPayload, { headers: getHeaders() })
       .then(res => {
+        this.loading = false;
         this.$toasted.success('Account Updated Successfully', {
           duration: 2000,
           position: 'top-right',
           icon: 'check'
         });
-        this.$router.replace('/user/profile');
+        this.$router.replace('/dashboard/profile');
       })
       .catch(err => {
         this.loading = false;
@@ -176,12 +179,13 @@ export default {
 
         axios.put(customUsersUrl + userId + '/', accountPayload, { headers: getHeaders() })
         .then(res => {
+          this.loading = false;
           this.$toasted.success('Password Updated Successfully', {
             duration: 2000,
             position: 'top-right',
             icon: 'check'
           });
-          this.$router.replace('/user/profile');
+          this.$router.replace('/dashboard/profile');
         })
         .catch(err => {
           this.loading = false;
@@ -194,6 +198,7 @@ export default {
         });
         // end request
       } else {
+        this.loading = false;
         this.$toasted.error('Passwords Don\'t Match', {
           duration: 4000,
           icon: 'block',
