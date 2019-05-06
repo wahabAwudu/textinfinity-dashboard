@@ -1,17 +1,9 @@
-# Vue Material Admin
+# Bulk SMS Project (TextInfinity)
 
 ### Introduction
-Vue Material Admin Template is a [Vue](https://vuejs.org/index.html/) Based Material Design Admin Template.
-And use [Vuetifyjs](https://vuetifyjs.com/) as base framework.
-Vuetify is Awesome.
+A project built for the Bulk SMS Project. Uses Vue Material Admin Template.
 
-### Demo
-[http://vma.isocked.com/#/dashboard](http://vma.isocked.com/#/dashboard) 
 
-### Preview
-![Preivew](http://vma.isocked.com//static/preview/01_preview.png)
-
-###
 ### Project Structure
 ```bash
 ├── build
