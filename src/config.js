@@ -22,10 +22,17 @@ export const newContactListUrl = baseUrl + 'lists/save_contact_list/';
 export const messagesUrl = baseUrl + 'messages/';
 export const numbersUrl = baseUrl + 'numbers/';
 
-// set request headers
-export const getHeaders = function () {
-  const authUser = JSON.parse(localStorage.getItem('authUser'));
+// sms endpoints
+export const bulkSmsUrl = messagesUrl + 'send_sms/';
 
+// set request headers
+import axios from 'axios';
+
+export const getHeaders = function () {
+  axios.defaults.xsrfCookieName = 'csrftoken';
+  axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+  const authUser = JSON.parse(localStorage.getItem('authUser'));
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT ' + authUser.token

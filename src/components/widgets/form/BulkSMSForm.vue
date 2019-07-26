@@ -77,7 +77,7 @@
 <script>
 /* eslint-disable */
 import axios from 'axios';
-import { getHeaders } from '@/config';
+import { bulkSmsUrl, getHeaders } from '@/config';
 
 export default {
   data: () => ({
@@ -109,6 +109,36 @@ export default {
       this.sendFormText();
     },
 
+    // send sms with form's text
+    sendFormText() {
+      let separated_phone_numbers = this.model.phone_numbers.split(",");
+      const contactPayload = {
+        sender_id: this.model.sender_id,
+        message: this.model.message_body,
+        recipients: separated_phone_numbers,
+      };
+      
+      // api request
+      axios.post(bulkSmsUrl, contactPayload, { headers: getHeaders() })
+        .then(res => {
+        this.$toasted.success('Messages sent successfully ', {
+            icon: 'check',
+            position: 'top-right',
+            duration: 3000,
+          });
+        })
+        .catch(err => {
+          this.$toasted.error('Error Occurred sending sms ', {
+            icon: 'block',
+            position: 'top-right',
+            duration: 3000,
+          });
+        });
+        // end api request
+    },
+    // end send sms with form text
+    
+    // send sms by file upload
     sendTextFile () {
       const form_data = new FormData();
       form_data.append('text_file', this.text_file, this.text_file.name);
@@ -126,25 +156,7 @@ export default {
           });
         });
     },
-
-    sendFormText() {
-      let separated_phone_numbers = this.model.phone_numbers.split(",");
-      const contactPayload = {
-        phone_numbers: separated_phone_numbers,
-      };
-
-      // axios.post('https://github.com', contactPayload, { headers: getHeaders() })
-      //   .then(res => {
-      //   //
-      //   })
-      //   .catch(err => {
-      //     this.$toasted.error('Error Occurred saving file', {
-      //       icon: 'block',
-      //       position: 'top-right',
-      //       duration: 3000,
-      //     });
-      //   });
-    },
+    // send sms by file upload
 
     saveToDraft () {
       //this.loading = true;
